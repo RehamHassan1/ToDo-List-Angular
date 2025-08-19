@@ -1,36 +1,23 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import nodemailer from 'nodemailer';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+
+const todoRoutes = require('./routes/todoRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use('/api/todos', todoRoutes);
+app.use('/api/auth', authRoutes);
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'rhrahoma@gmail.com', 
-    pass: 'Reham552002'     
-  }
-});
+mongoose.connect('mongodb://127.0.0.1:27017/todoapp', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log(' MongoDB Connected'))
+.catch(err => console.error(' MongoDB Error:', err));
 
-app.post('/api/forgot-password', (req, res) => {
-  const { email } = req.body;
-  
-  const resetLink = `http://localhost:4200/forget3?token=dummy-token`;
-
-  transporter.sendMail({
-    from: 'rhrahoma@gmail.com',
-    to: email,
-    subject: 'Password Reset',
-    html: `<p>Click <a href="${resetLink}">here</a> to reset your password</p>`
-  }, (err) => {
-    if (err) {
-      return res.status(500).json({ message: 'Error sending email' });
-    }
-    res.json({ message: 'Recovery email sent!' });
-  });
-});
-
-app.listen(5000, () => console.log('Server running on port 5000'));
+// Start server
+const PORT = 5000;
+app.listen(PORT, () => console.log(` Server running on http://localhost:${PORT}`));
