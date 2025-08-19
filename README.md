@@ -1,7 +1,6 @@
 # 📝 ToDo List App
 
-A simple and responsive **ToDo List** web application built with **Angular** and **Firebase**, featuring user authentication and CRUD functionality.
-
+A simple and responsive **ToDo List** web application built with **Angular** and **Node.js/Express API**, featuring user authentication and CRUD functionality.
 ---
 
 ## 🚀 Features
@@ -18,15 +17,15 @@ A simple and responsive **ToDo List** web application built with **Angular** and
   - ❌ Delete tasks
 
 - **Database**
-  - Powered by **Firebase Firestore** for real-time data storage.
-
+Built with **Node.js/Express** to handle authentication and task management.
 ---
 
 ## 🛠️ Tech Stack
 
 - **Frontend:** Angular
-- **Backend / Database:** Firebase (Authentication + Firestore)
-- **Language:** TypeScript, HTML, SCSS/CSS
+- **Backend / API**: Node.js, Express
+- **Database**: MongoDB
+- **Language:** TypeScript, HTML, CSS
 
 ---
 
